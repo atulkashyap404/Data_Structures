@@ -11,31 +11,24 @@ struct node *root = NULL;
 void append();
 void addAtBegin();
 void addAtAfter();
-void deleteFirstNode();
-void deleteSpecifiedNode();
+void delete();
 void display();
-void length();
-void reverseList();
-void swapTwoNodes();
-void sortElements();
+int length();
 
 void main()
 {
 
-    int ch;
+    int ch, result;
 
     while (1)
     {
         printf("1. Append \n");
         printf("2. Add at begin \n");
         printf("3. Add at After \n");
-        printf("4. Delete First Node \n");
-        printf("5. Delete Specified Node \n");
-        printf("6. Display \n");
-        printf("7. Length \n");
-        printf("8. Reverse List\n");
-        printf("9. Swap 2 Nodes \n");
-        printf("10. Sort Elements \n");
+        printf("4. Delete\n");
+        printf("5. Display \n");
+        printf("6. Length \n");
+        printf("7. Exit \n");
 
         printf("Enter the choice : ");
         scanf("%d", &ch);
@@ -52,25 +45,17 @@ void main()
             addAtAfter();
             break;
         case 4:
-            deleteFirstNode();
+            delete ();
             break;
         case 5:
-            deleteSpecifiedNode();
-            break;
-        case 6:
             display();
             break;
+        case 6:
+            result = length();
+            printf("The length of the Single Linked List :  %d\n", result);
+            break;
         case 7:
-            length();
-            break;
-        case 8:
-            reverseList();
-            break;
-        case 9:
-            swapTwoNodes();
-            break;
-        case 10:
-            sortElements();
+            exit(0);
             break;
 
         default:
@@ -94,46 +79,58 @@ void append()
     else
     {
         struct node *p;
+        p = root;
         while (p->link != NULL)
         {
             p = p->link;
         }
-        p->link=temp;
+        p->link = temp;
     }
 }
 
 void addAtBegin()
 {
+    struct node *temp;
+    temp = (struct node *)malloc(sizeof(struct node));
+    printf("Enter the Node data : ");
+    scanf("%d", &temp->data);
+    temp->link = NULL;
+    if (root == NULL)
+    {
+        root = temp;
+    }
+    else
+    {
+
+        temp->link = root;
+        root = temp;
+    }
 }
 
 void addAtAfter()
 {
 }
 
-void deleteFirstNode()
-{
-}
-
-void deleteSpecifiedNode()
+void delete()
 {
 }
 
 void display()
 {
+    struct node* temp;
+    temp=root;
+    
 }
 
-void length()
+int length()
 {
-}
-
-void reverseList()
-{
-}
-
-void swapTwoNodes()
-{
-}
-
-void sortElements()
-{
+    int count = 0;
+    struct node *temp;
+    temp = root;
+    while (temp->link != NULL)
+    {
+        count++;
+        temp = temp->link;
+    }
+    return count;
 }
