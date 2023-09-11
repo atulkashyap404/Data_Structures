@@ -119,6 +119,19 @@ void display()
 {
     struct node* temp;
     temp=root;
+    if(temp == NULL)
+    {
+        printf("List is empty \n\n");
+    }
+    else
+    {
+        while(temp != NULL)
+        {
+            printf("%d-->",temp->data);
+            temp=temp->link;
+        }
+        printf("\n\n");
+    }
     
 }
 
