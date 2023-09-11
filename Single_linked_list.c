@@ -109,30 +109,83 @@ void addAtBegin()
 
 void addAtAfter()
 {
+    struct node *temp, *p;
+    int loc, len, i = 1;
+    printf("Enter the location : ");
+    scanf("%d", &loc);
+    len = length();
+    if (loc > len)
+    {
+        printf("Invalid location\n");
+        printf("Currently list is having %d nodes", len);
+    }
+    else
+    {
+        p = root;
+        while (i < loc)
+        {
+            p = p->link;
+            i++;
+        }
+        temp = (struct node *)malloc(sizeof(struct node));
+        printf("Enter the node data : ");
+        scanf("%d", &temp->data);
+        temp->link = NULL;
+        temp->link = p->link;
+        p->link = temp;
+    }
 }
 
 void delete()
 {
+    struct node *temp;
+    int loc;
+    printf("Enter the location to delete : ");
+    scanf("%d", &loc);
+    if (loc > length())
+    {
+        printf("Invalid loaction\n");
+    }
+    else if (loc == 1)
+    {
+        temp = root;
+        root = temp->link;
+        temp->link = NULL;
+        free(temp);
+    }
+    else
+    {
+        struct node *p = root, *q;
+        int i = 1;
+        while (i < loc - 1)
+        {
+            p = p->link;
+            i++;
+        }
+        q = p->link;
+        p->link = q->link;
+        q->link = NULL;
+        free(q);
+    }
 }
 
 void display()
 {
-    struct node* temp;
-    temp=root;
-    if(temp == NULL)
+    struct node *temp;
+    temp = root;
+    if (temp == NULL)
     {
         printf("List is empty \n\n");
     }
     else
     {
-        while(temp != NULL)
+        while (temp != NULL)
         {
-            printf("%d-->",temp->data);
-            temp=temp->link;
+            printf("%d-->", temp->data);
+            temp = temp->link;
         }
         printf("\n\n");
     }
-    
 }
 
 int length()
