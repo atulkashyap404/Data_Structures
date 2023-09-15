@@ -14,6 +14,7 @@ void addAtAfter();
 void delete();
 void display();
 int length();
+void swapNodes();
 
 void main()
 {
@@ -28,7 +29,8 @@ void main()
         printf("4. Delete\n");
         printf("5. Display \n");
         printf("6. Length \n");
-        printf("7. Exit \n");
+        printf("7. Swap Nodes \n");
+        printf("8. Exit \n");
 
         printf("Enter the choice : ");
         scanf("%d", &ch);
@@ -55,6 +57,9 @@ void main()
             printf("The length of the Single Linked List :  %d\n", result);
             break;
         case 7:
+            swapNodes();
+            break;
+        case 8:
             exit(0);
             break;
 
@@ -199,4 +204,32 @@ int length()
         temp = temp->link;
     }
     return count;
+}
+
+void swapNodes()
+{
+    struct node *p, *q, *r;
+    int loc, i = 1;
+    printf("Enter the location : ");
+    scanf("%d", &loc);
+    if (loc > length())
+    {
+        printf("Invalid lcation\n");
+    }
+    else
+    {
+        p = root;
+        while (i < loc - 1)
+        {
+            p = p->link;
+            i++;
+        }
+
+        q = p->link;
+        r = q->link;
+
+        q->link = r->link;
+        r->link = q;
+        p->link = r;
+    }
 }
