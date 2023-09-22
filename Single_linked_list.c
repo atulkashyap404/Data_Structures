@@ -15,6 +15,7 @@ void delete();
 void display();
 int length();
 void swapNodes();
+void reverseList();
 
 void main()
 {
@@ -30,7 +31,8 @@ void main()
         printf("5. Display \n");
         printf("6. Length \n");
         printf("7. Swap Nodes \n");
-        printf("8. Exit \n");
+        printf("8. Reverse list\n");
+        printf("9. Exit \n");
 
         printf("Enter the choice : ");
         scanf("%d", &ch);
@@ -60,6 +62,9 @@ void main()
             swapNodes();
             break;
         case 8:
+            reverseList();
+            break;
+        case 9:
             exit(0);
             break;
 
@@ -233,3 +238,120 @@ void swapNodes()
         p->link = r;
     }
 }
+
+
+
+
+//logic 1----- correct this reverseList() function plz. Do not correct in logic 2 or logic 3
+
+void reverseList()
+{
+    struct node *p, *q;
+    int i, j, len, k, temp;
+    len = length();
+    i = 0;
+    j = len - 1;
+    p = root;
+    q = root;
+    while (i < j)
+    {
+        k = 0;
+        while (k < j)
+        {
+            q = q->link;
+            k++;
+        }
+
+        temp = p->data;
+        p->data = q->data;
+        q->data = temp;
+        i++;
+        j--;
+        p=p->link;
+        q=root;
+    }
+}
+
+
+
+
+//logic 2 -----fail----------------------------------------------------------
+
+// void reverseList()
+// {
+//     struct node *p, *q;
+//     int i, j, len, k, temp;
+//     len = length();
+//     i = 0;
+//     j = len - 1;
+//     p = q = root;
+    
+//     while (i < j)
+//     {
+//         k = 0;
+//         while (k < j)
+//         {
+//             q = q->link;
+//             k++;
+//         }
+
+//         if (p == q) {
+//             // If p and q meet (in case of even length list), break
+//             break;
+//         }
+
+//         temp = p->data;
+//         p->data = q->data;
+//         q->data = temp;
+//         i++;
+//         j--;
+//         p = p->link;
+
+//         // Update q to the new position
+//         if (i < j) {
+//             q = root;
+//         }
+//     }
+// }
+
+//logic 3-----fail---------------------------------------------------------------
+
+// void reverseList()
+// {
+//     struct node *p, *q;
+//     int i, j, len, k, temp;
+//     len = length();
+//     i = 0;
+//     j = len - 1;
+//     p = q = root;
+
+//     while (i < j)
+//     {
+//         k = 0;
+//         while (k < j)
+//         {
+//             q = q->link;
+//             k++;
+//         }
+
+//         if (p == q) {
+//             // If p and q meet (in case of even length list), break
+//             break;
+//         }
+
+//         temp = p->data;
+//         p->data = q->data;
+//         q->data = temp;
+//         i++;
+//         j--;
+
+//         // If there's only one element left, break
+//         if (i == j) {
+//             break;
+//         }
+
+//         p = p->link;
+//         q = root;
+//     }
+// }
+
