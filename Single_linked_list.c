@@ -246,30 +246,14 @@ void swapNodes()
 
 void reverseList()
 {
-    struct node *p, *q;
-    int i, j, len, k, temp;
-    len = length();
-    i = 0;
-    j = len - 1;
-    p = root;
-    q = root;
-    while (i < j)
-    {
-        k = 0;
-        while (k < j)
-        {
-            q = q->link;
-            k++;
-        }
-
-        temp = p->data;
-        p->data = q->data;
-        q->data = temp;
-        i++;
-        j--;
-        p=p->link;
-        q=root;
-    }
+struct node *curr = root,*prev = NULL,*next = NULL;
+while(curr!=NULL){
+    next = curr->link;
+    curr->link = prev;
+    prev = curr;
+    curr = next;
+}
+root = prev;
 }
 
 
