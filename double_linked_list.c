@@ -13,6 +13,9 @@ void append();
 int length();
 void display();
 void addAtAfter();
+void deleteNodeLoc();
+void deleteNodeBegin();
+void deleteNodeEnd();
 
 int main()
 {
@@ -23,7 +26,10 @@ int main()
         printf("2. Add At After\n");
         printf("3. Length\n");
         printf("4. Display\n");
-        printf("5. Exit\n");
+        printf("5. Delete Node By Location\n");
+        printf("6. Delete Node Begin\n");
+        printf("7. Delete Node End\n");
+        printf("8. Exit\n");
 
         printf("Enter the choice: ");
         scanf("%d", &ch);
@@ -43,6 +49,15 @@ int main()
             display();
             break;
         case 5:
+            deleteNodeLoc();
+            break;
+        case 6:
+            deleteNodeBegin();
+            break;
+        case 7:
+            deleteNodeEnd();
+            break;
+        case 8:
             exit(0);
             break;
 
@@ -110,33 +125,93 @@ void display()
 
 void addAtAfter()
 {
-    struct node*temp, *p;
-    int loc,len,i=1;
+    struct node *temp, *p;
+    int loc, len, i = 1;
     printf("Enter the location to add : ");
-    scanf("%d",&loc);
-    len=length();
-    if(loc>len)
+    scanf("%d", &loc);
+    len = length();
+    if (loc > len)
     {
         printf("Invalid location");
-        printf("List cantain : %d nodes only\n",len);
+        printf("List cantain : %d nodes only\n", len);
     }
-    else{
-        temp=(struct node*)malloc(sizeof(struct node));
+    else
+    {
+        temp = (struct node *)malloc(sizeof(struct node));
         printf("Enter the node data : ");
-        scanf("%d",&temp->data);
-        temp->left=NULL;
-        temp->right=NULL;
-        p=root;
-        while (i<=loc)
+        scanf("%d", &temp->data);
+        temp->left = NULL;
+        temp->right = NULL;
+        p = root;
+        while (i <= loc)
         {
-            p=p->right;
+            p = p->right;
             i++;
         }
 
-        temp->right=p->right;
-        p->right->left=temp;
-        temp->left=p;
-        p->right=temp;
+        temp->right = p->right;
+        p->right->left = temp;
+        temp->left = p;
+        p->right = temp;
+    }
+}
+
+void deleteNodeLoc()
+{
+    struct node *p;
+    int loc, len, i = 1;
+    len = length();
+    printf("Enter the Location : ");
+    scanf("%d", &loc);
+    if (loc > len)
+    {
+        printf("Invalid Location\n");
+        printf("List having only %d length\n", len);
+    }
+    else
+    {
+        p = root;
+        while (i < loc)
+        {
+            p = p->right;
+            i++;
+        }
+
+        p->left->right = p->right;
+        p->right->left = p->left;
+        free(p);
+    }
+}
+
+void deleteNodeBegin()
+{
+    struct node *temp;
+    temp = root;
+    if (root == NULL)
+    {
+        printf("List is Empty\n");
+    }
+    root = temp->right;
+    temp->right->left = NULL;
+}
+
+void deleteNodeEnd()
+{
+    struct node *temp;
+    temp = root;
+    int len,i=1;
+    len=length();
+    if (root == NULL)
+    {
+        printf("List is Empty\n");
+    }
+    else{
+        while (i<len-1)
+        {
+            temp=temp->right;
+        }
+        
+        temp->right=NULL;
         
     }
 }
